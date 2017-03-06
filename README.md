@@ -12,7 +12,7 @@ to understand how to work with the code. Note that setup instructions are still 
 To learn more about the Sovrin Identity Network and the Sovrin Foundation, see [sovrin.org](https://www.sovrin.org).
 
 ----
-   Copyright 2016 Sovrin Foundation
+   Copyright 2017 Sovrin Foundation
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
