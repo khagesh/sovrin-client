@@ -41,6 +41,7 @@ class AgentProver:
             self.signAndSend(msg=op, linkName=link.name)
         except LinkNotReady as ex:
             self.notifyMsgListener(str(ex))
+
     def sendReqClaim(self, link: Link, schemaKey):
         if self.loop.is_running():
             self.loop.call_soon(asyncio.ensure_future,
