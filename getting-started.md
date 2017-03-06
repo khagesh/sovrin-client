@@ -76,7 +76,7 @@ $ sovrin
 You should see an interactive prompt, like this:
 
 ```
-Sovrin - CLI version 1.17(c) 2016 Evernym, Inc.
+Sovrin - CLI version 1.17(c) 2017 Evernym, Inc.
 Type 'help' for more information.
 sovrin> 
 ```
