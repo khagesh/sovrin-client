@@ -2,7 +2,7 @@ from typing import Callable, Any, List
 
 from plenum.common.log import getlogger
 from plenum.common.raet import getHaFromLocalEstate
-from plenum.common.stacked import SimpleStack
+from plenum.common.stacked import KITStack
 from plenum.common.types import HA
 from plenum.common.util import randomString
 from raet.raeting import AutoMode
@@ -11,7 +11,7 @@ from raet.road.estating import RemoteEstate
 logger = getlogger()
 
 
-class Endpoint(SimpleStack):
+class Endpoint(KITStack):
     def __init__(self, port: int, msgHandler: Callable,
                  name: str=None, basedirpath: str=None):
         if name and basedirpath:
@@ -29,7 +29,8 @@ class Endpoint(SimpleStack):
         if basedirpath:
             stackParams["basedirpath"] = basedirpath
 
-        super().__init__(stackParams, self.baseMsgHandler)
+        self.registry = {}
+        super().__init__(stackParams, self.baseMsgHandler, self.registry)
 
         self.msgHandler = msgHandler
 
@@ -62,8 +63,10 @@ class Endpoint(SimpleStack):
     def connectTo(self, ha):
         remote = self.findInRemotesByHA(ha)
         if not remote:
-            remote = RemoteEstate(stack=self, ha=ha)
-            self.addRemote(remote)
-            # updates the store time so the join timer is accurate
-            self.updateStamp()
-            self.join(uid=remote.uid, cascade=True, timeout=30)
+            while True:
+                name = randomString(8)
+                if name in self.registry: continue
+                else: break
+
+            self.registry[name] = ha
+            self.connect(name)
