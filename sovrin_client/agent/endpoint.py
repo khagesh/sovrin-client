@@ -67,4 +67,4 @@ class Endpoint(SimpleStack):
 
         # updates the store time so the join timer is accurate
         self.updateStamp()
-        self.join(uid=remote.uid, cascade=True, timeout=30)
+        self.join(uid=remote.uid, cascade=True, timeout=30, renewal=True)
